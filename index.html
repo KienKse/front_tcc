@@ -16,10 +16,10 @@
 
 <div class="jumbotron text-center">
     <h2>Experimento: Imagens Raio-X</h2>
-    <p>Autor: Ícaro Santana Silva(bacharel, UCSal) e Sérgio Matheus Barbosa Oliveira(bacharel, UCSal).</p> 
+    <p>Autor: Ícaro Santana Silva(Estudante, UCSal) e Sérgio Matheus Barbosa Oliveira(Estudante, UCSal).</p> 
     <p></p>
     <p><b>Leia as instruções abaixo com atenção:</b></p>
-    
+
     <h4>1. Análise as questões abaixo, elas possuem duas imagens abaixo e</h4>
     <h4>podem ser imagens de raio-x de pessoas reais, ou imagens de raio-x falsas (geradas de forma sintética).</h4>
     <h4>2. Selecione as imagens que você acredita serem <b>VERDADEIRAS</b> (reais).</h4>
@@ -225,25 +225,29 @@ $(document).ready(function(){
 
       console.log(values);
 
-      // var url = "https://localhost:8080/api/resposta/add";
+      // var url = "http://localhost:8080/api/resposta/add";
       var url = "https://experimentotcc.herokuapp.com/api/resposta/add";
 
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", url, true);
-      xmlhttp.withCredentials = true;
-      xmlhttp.setRequestHeader("Content-Type", 'application/json charset=UTF-8', 'Access-Control-Allow-Origin: true');
+
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              // Requisição finalizada. Faça o processamento aqui.
+              console.log(this.response);
+          }
+      }
       xmlhttp.send(JSON.stringify({
-        fileA: img_a_path,
-        fileB: img_b_path,
+        fileA: filename_a,
+        fileB: filename_b,
         choiceImgA: img_a_is_fake,
         choiceImgB: img_b_is_fake,
         hour: var_hour,
         date: var_date,
         name: name_person
       }));
-      xmlhttp.onloadend = function () {
-        console.log("DONE")
-      };
     inicio();
     } 
     );
