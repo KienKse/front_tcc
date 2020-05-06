@@ -27,7 +27,7 @@
     <h4>4. Se você não marcar nenhuma imagem como verdadeira, <b>aperte o botão enviar de qualquer forma.</b></h4>
     <h4>5. Após você apertar enviar, novas imagens irão aparecer. Continue selecionando as verdadeiras.</h4>
 
-    <p><font color="red">Você tem <span id="time">05:00</span> minutos para terminar o experimento!</font></h4>
+    <p><font color="red">Você tem <span id="time">03:00</span> minutos para terminar o experimento!</font></h4>
     <p>Utilize <b>todo o tempo disponível</b> para selecionar o maior número de imagens verdadeiras.</h4>
   </div>
 
@@ -73,9 +73,9 @@ function startTimer(duration, display) {
 }
 
 window.onload = function () {
-    var fiveMinutes = 60 * 5,
+    var tresMinutes = 60 * 3,
         display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
+    startTimer(tresMinutes, display);
 };
 
 var img_a = Math.random();
