@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.0/image-picker.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.0/image-picker.min.css" rel="stylesheet"/>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.0/image-picker.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.0/image-picker.min.css" rel="stylesheet"/>
-
+    <script src="http://www.turnjs.com/lib/turn.min.js "></script>
 
 <div class="jumbotron text-center">
     <h2>Experimento: Imagens Raio-X</h2>
@@ -108,32 +106,14 @@ function inicio() {
   img_a = Math.random();
   img_b = Math.random();
 
-  if(img_a >= 0.5)
-  {
-     console.log("IMG A: Imagem fake");
-     img_a = 1;
-  }
-  else
-  {
-     console.log("IMG A: Imagem real");
-     img_a = 0;
-  }
+  // var wg = "https://raw.githubusercontent.com/KienKse/front_tcc/master/wg/";
+  // var dc = "https://raw.githubusercontent.com/KienKse/front_tcc/master/dc/";
+  var wg = "C:/Users/kiens/Documents/workspace/front_tcc/wg/";
+  var dc = "C:/Users/kiens/Documents/workspace/front_tcc/dc/";
 
+  // var wg = "https://raw.githubusercontent.com/andrewyzy/experiment/master/imgs_real/";
+  // var dc = "https://raw.githubusercontent.com/andrewyzy/experiment/master/imgs_final/";
 
-  if(img_b < 0.5)
-  {
-     console.log("IMG B: Imagem fake");
-     img_b = 1;
-  }
-  else
-  {
-    console.log("IMG B: Imagem real");
-     img_b = 0;
-  }
-
-
-  var w = "/wg/";
-  var dc = "/wg/";
 
   img_a_path = "";
   img_b_path = "";
@@ -141,38 +121,41 @@ function inicio() {
   filename_b = "";
 
   if(img_a == 0){
-    var rand = Math.floor(Math.random()*1479)+1;
-    img_a_path+=w;
-    filename_a = rand+".jpg";
+    var rand = Math.floor(Math.random()*123)+1;
+    console.log("img_a == 0){ 1 " + rand)
+    img_a_path+=wg;
+    filename_a = "("+rand+").jpg";
+    console.log("filename_a 1 " + filename_a)
 
     img_a_path+= filename_a;
     console.log(img_a_path);
   }
   else
   {
-    var rand = Math.floor(Math.random()*599)+1;
-    var rand_1 = Math.floor(Math.random()*9);
+    var rand = Math.floor(Math.random()*123)+1;
+    console.log("img_a == 0){ 2 " + rand)
     img_a_path+=dc;
-    filename_a = rand+"_"+rand_1+".png";
+    filename_a = "("+rand+").png";
 
     img_a_path+= filename_a
     console.log(img_a_path);
   }
   
   if(img_b == 0){
-    var rand = Math.floor(Math.random()*1479)+1;
-    img_b_path+=w;
-    filename_b = rand+".jpg";
+    var rand = Math.floor(Math.random()*123)+1;
+    console.log("img_a == 0){ 3 " + rand)
+    img_b_path+=wg;
+    filename_b = "("+rand+").jpg";
 
     img_b_path+= filename_b;
     console.log(img_b_path);
   }
   else
   {
-    var rand = Math.floor(Math.random()*599)+1;
-    var rand_1 = Math.floor(Math.random()*9);
+    var rand = Math.floor(Math.random()*123)+1;
+    console.log("img_a == 0){ 4 " + rand)
     img_b_path+=dc;
-    filename_b = rand+"_"+rand_1+".png";
+    filename_b = "("+rand+").png";
 
     img_b_path+= filename_b;
     console.log(img_b_path);
@@ -213,8 +196,6 @@ $(document).ready(function(){
 
   inicio();
 
-
-
     $("button").click(function()
     {
       var name_person = document.getElementById("myText").value;
@@ -239,19 +220,6 @@ $(document).ready(function(){
     
       console.log(img_a_is_fake, img_b_is_fake);
 
-      if(img_a == 0)  
-          img_a = "falso";
-      if(img_a == 1)  
-          img_a = "verdadeiro"; 
-      if(img_b == 0)  
-        img_b = "falso";
-      if(img_b == 1)  
-        img_b = "verdadeiro"; 
-
-
-      console.log("AS IMAGENS SÃO:");
-      console.log(img_a,img_b );
-
       var d = new Date();
       var h = addZero(d.getUTCHours());
       var mi = addZero(d.getUTCMinutes());
@@ -269,25 +237,25 @@ $(document).ready(function(){
 
       console.log(values);
 
-      var url = "https://experimentotcc.herokuapp.com/api/resposta/add"
+      // var url = "https://localhost:8080/api/resposta/add";
+      var url = "https://experimentotcc.herokuapp.com/api/resposta/add";
 
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", url, true);
-      xmlhttp.setRequestHeader("Content-Type", "application/json");
-      xmlhttp.send(JSON.stringify(
-        {
-          file_a: filename_a,
-          file_b: filename_b,
-          file_a_type: img_a,
-          file_b_type: img_b,
-          choice_img_a: img_a_is_fake,
-          choice_img_b: img_b_is_fake,
-          hour: var_hour,
-          date: var_date,
-          name: name_person
-        }
-        ));
-
+      xmlhttp.withCredentials = true;
+      xmlhttp.setRequestHeader("Content-Type", 'application/json charset=UTF-8', 'Access-Control-Allow-Origin: true');
+      xmlhttp.send(JSON.stringify({
+        fileA: img_a_path,
+        fileB: img_b_path,
+        choiceImgA: img_a_is_fake,
+        choiceImgB: img_b_is_fake,
+        hour: var_hour,
+        date: var_date,
+        name: name_person
+      }));
+      xmlhttp.onloadend = function () {
+        console.log("DONE")
+      };
     inicio();
     } 
     );
