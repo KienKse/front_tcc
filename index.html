@@ -114,43 +114,38 @@ function inicio() {
   filename_a = "";
   filename_b = "";
 
-  if(img_a == 0){
+  if(img_a > 0.5) {
+    //ABRIR A WG
     var rand = Math.floor(Math.random()*123)+1;
-    console.log("img_a == 0){ 1 " + rand)
     img_a_path+=wg;
     filename_a = "wg ("+rand+").jpg";
-    console.log("filename_a 1 " + filename_a)
-
+    console.log("filename_a " + filename_a)
+    img_a_path+= filename_a;
+    console.log(img_a_path);
+  } else {
+    //ABRIR A DC
+    var rand = Math.floor(Math.random()*123)+1;
+    img_a_path+=dc;
+    filename_a = "dc ("+rand+").png";
+    console.log("filename_a " + filename_a)
     img_a_path+= filename_a;
     console.log(img_a_path);
   }
-  else
-  {
-    var rand = Math.floor(Math.random()*123)+1;
-    console.log("img_a == 0){ 2 " + rand)
-    img_a_path+=dc;
-    filename_a = "dc ("+rand+").png";
 
-    img_a_path+= filename_a
-    console.log(img_a_path);
-  }
-  
-  if(img_b == 0){
+  if(img_b > 0.5) {
+    //ABRIR A DC
     var rand = Math.floor(Math.random()*123)+1;
-    console.log("img_a == 0){ 3 " + rand)
-    img_b_path+=wg;
-    filename_b = "wg ("+rand+").jpg";
-
-    img_b_path+= filename_b;
-    console.log(img_b_path);
-  }
-  else
-  {
-    var rand = Math.floor(Math.random()*123)+1;
-    console.log("img_a == 0){ 4 " + rand)
     img_b_path+=dc;
     filename_b = "dc ("+rand+").png";
-
+    console.log("filename_b " + filename_b)
+    img_b_path+= filename_b;
+    console.log(img_b_path);
+  } else {
+    //ABRIR A WG
+    var rand = Math.floor(Math.random()*123)+1;
+    img_b_path+=wg;
+    filename_b = "wg ("+rand+").jpg";
+    console.log("filename_b " + filename_b)
     img_b_path+= filename_b;
     console.log(img_b_path);
   }
@@ -167,7 +162,6 @@ function inicio() {
             "type": img_b,
         }
   }
-
 
   for (var i in imgData) {
         container.append($('<option data-img-src="'+imgData[i].url+'" data-img-label="Just an image!" value="'+imgData[i].name+'">'));
