@@ -132,8 +132,8 @@ function inicio() {
   }
 
 
-  var w = "LINK/PATH/GITHUB";
-  var dc = "LINK/PATH/GITHUB";
+  var w = "/wg/";
+  var dc = "/wg/";
 
   img_a_path = "";
   img_b_path = "";
@@ -227,26 +227,26 @@ $(document).ready(function(){
       const selected = document.querySelectorAll('#cont option:checked');
       const values = Array.from(selected).map(el => el.value);
       
-      var img_a_is_fake = "verdadeiro";
-      var img_b_is_fake = "verdadeiro";
+      var img_a_is_fake = "falso";
+      var img_b_is_fake = "falso";
 
       for (var i in values) {
         if(values[i]== 1)
-          img_a_is_fake = "falso";
+          img_a_is_fake = "verdadeiro";
         if(values[i]== 2)
-          img_b_is_fake = "falso";
+          img_b_is_fake = "verdadeiro";
       }
     
       console.log(img_a_is_fake, img_b_is_fake);
 
       if(img_a == 0)  
-          img_a = "verdadeiro";
+          img_a = "falso";
       if(img_a == 1)  
-          img_a = "falso"; 
+          img_a = "verdadeiro"; 
       if(img_b == 0)  
-        img_b = "verdadeiro";
+        img_b = "falso";
       if(img_b == 1)  
-        img_b = "falso"; 
+        img_b = "verdadeiro"; 
 
 
       console.log("AS IMAGENS SÃO:");
@@ -269,8 +269,7 @@ $(document).ready(function(){
 
       console.log(values);
 
-      // var url = "https://prod-106.westus.logic.azure.com:443/workflows/91cd1b5f51d3495eb58c1aa5c2b23246/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1wcZrFofixCBnnzS5c8MdohZcQRNEvlgUI-d_QuCWP0"
-      var url = ""
+      var url = "https://experimentotcc.herokuapp.com/api/resposta/add"
 
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", url, true);
